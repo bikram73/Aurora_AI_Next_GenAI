@@ -216,6 +216,23 @@ function initTestimonialSlider() {
   slider.addEventListener('mouseenter', stopAutoSlide);
   slider.addEventListener('mouseleave', startAutoSlide);
 
+  // Keyboard navigation for accessibility (when testimonials section is focused or in view)
+  document.addEventListener('keydown', (e) => {
+    const rect = slider.getBoundingClientRect();
+    const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inViewport) return;
+
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      slideTo(currentIndex - 1);
+      startAutoSlide();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      slideTo(currentIndex + 1);
+      startAutoSlide();
+    }
+  });
+
   // Reset on resize
   window.addEventListener('resize', () => {
     slideTo(Math.min(currentIndex, getMaxIndex()));
@@ -225,6 +242,134 @@ function initTestimonialSlider() {
   startAutoSlide();
 }
 
+// ─── Interactive AI Demo Chat Sandbox ───
+function initDemoChat() {
+  const chatContainer = document.querySelector('.demo-chat');
+  const inputField = document.getElementById('demo-input-field');
+  const sendBtn = document.getElementById('demo-send-btn');
+  
+  if (!chatContainer || !inputField || !sendBtn) return;
+
+  const initialAIMsg = chatContainer.querySelector('.chat-msg--ai');
+  if (!initialAIMsg) return;
+  
+  const initialAIHTML = initialAIMsg.querySelector('.chat-bubble').innerHTML;
+  
+  // Hide the initial AI bubble text initially
+  const initialBubble = initialAIMsg.querySelector('.chat-bubble');
+  initialBubble.style.opacity = '0';
+  
+  let initialTriggered = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !initialTriggered) {
+        initialTriggered = true;
+        // Make AI msg card visible but run sequence inside
+        initialBubble.style.opacity = '1';
+        simulateAISequence(initialAIMsg, initialAIHTML);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(chatContainer);
+
+  function simulateAISequence(msgElement, finalHTML, customPrompt = '') {
+    const bubble = msgElement.querySelector('.chat-bubble');
+    if (!bubble) return;
+
+    // Save classes
+    const originalClasses = bubble.className;
+
+    // Show step sequence
+    bubble.className = 'chat-bubble chat-bubble--status';
+    bubble.innerHTML = `<span class="status-step active">Analyzing prompt...</span>`;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    const steps = [
+      'Generating components...',
+      'Optimizing layout...',
+      'Complete ✓'
+    ];
+
+    let stepIdx = 0;
+    
+    function runNextStep() {
+      if (stepIdx < steps.length) {
+        setTimeout(() => {
+          const stepText = steps[stepIdx];
+          bubble.innerHTML = `<span class="status-step active">${stepText}</span>`;
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+          stepIdx++;
+          runNextStep();
+        }, 700);
+      } else {
+        // Show final output
+        setTimeout(() => {
+          bubble.className = originalClasses;
+          if (customPrompt) {
+            bubble.innerHTML = `
+              <p>I have built an optimized prototype for your request: "<strong>${customPrompt}</strong>". Here is the generated component:</p>
+              <div class="chat-code-block">
+                <code>// Aurora Code Pilot 2.4 - Generated Output
+import React from 'react';
+
+export default function CustomApp() {
+  return (
+    &lt;div className="p-8 bg-oceanic-noir text-white rounded-2xl border border-mystic-mint"&gt;
+      &lt;h3 className="text-xl font-bold"&gt;Custom Workspace Enabled&lt;/h3&gt;
+      &lt;p className="mt-2 text-sm text-gray-400"&gt;Generated dynamically for: ${customPrompt}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code>
+              </div>
+            `;
+          } else {
+            bubble.innerHTML = finalHTML;
+          }
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 500);
+      }
+    }
+
+    runNextStep();
+  }
+
+  function handleSendMessage() {
+    const text = inputField.value.trim();
+    if (!text) return;
+
+    inputField.value = '';
+
+    // Create user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-msg chat-msg--user';
+    userMsg.innerHTML = `<div class="chat-bubble">${text}</div>`;
+    chatContainer.appendChild(userMsg);
+
+    // Create placeholder AI message
+    const aiMsg = document.createElement('div');
+    aiMsg.className = 'chat-msg chat-msg--ai';
+    aiMsg.innerHTML = `<div class="chat-bubble"></div>`;
+    chatContainer.appendChild(aiMsg);
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // Simulate AI sequence after short delay
+    setTimeout(() => {
+      simulateAISequence(aiMsg, '', text);
+    }, 400);
+  }
+
+  sendBtn.addEventListener('click', handleSendMessage);
+  inputField.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  });
+}
+
 // ─── Export ───
 export function initAnimations() {
   initScrollReveal();
@@ -232,4 +377,5 @@ export function initAnimations() {
   initScrollToTop();
   initNavTracking();
   initTestimonialSlider();
+  initDemoChat();
 }
