@@ -1,0 +1,19 @@
+# Netlify Configuration File for Aurora AI
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # The directory that contains the deploy-ready HTML/CSS/JS assets
+  publish = "dist"
+
+  # The command to execute to build the project
+  command = "npm run build"
+
+[build.processing]
+  # Enable optimization of assets
+  skip_processing = false
+
+[[redirects]]
+  # Redirect all paths to index.html for Single Page Application routing (if needed)
+  from = "/*"
+  status = 200
+  to = "/index.html"
