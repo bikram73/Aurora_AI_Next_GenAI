@@ -4,6 +4,12 @@
 
 Welcome to **Aurora AI**, a premium, high-converting, and lightning-fast SaaS landing page built from the ground up to showcase an advanced AI-driven data automation platform. Engineered for maximum speed, motion choreography, and architectural integrity using a **zero-dependency vanilla JavaScript stack + Vite**.
 
+<br>
+
+<p align="center">
+  <img alt="Aurora AI Dashboard" src="image/image.png" width="800">
+</p>
+
 ---
 
 ## 🌟 Key Features
