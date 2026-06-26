@@ -183,13 +183,46 @@ function initTestimonialSlider() {
     slider.style.transition = 'transform 350ms ease-in-out';
   }
 
-  prevBtn.addEventListener('click', () => slideTo(currentIndex - 1));
-  nextBtn.addEventListener('click', () => slideTo(currentIndex + 1));
+  let autoSlideInterval;
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    autoSlideInterval = setInterval(() => {
+      const maxIdx = getMaxIndex();
+      if (currentIndex >= maxIdx) {
+        slideTo(0);
+      } else {
+        slideTo(currentIndex + 1);
+      }
+    }, 5000);
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
+    }
+  }
+
+  prevBtn.addEventListener('click', () => {
+    slideTo(currentIndex - 1);
+    startAutoSlide();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    slideTo(currentIndex + 1);
+    startAutoSlide();
+  });
+
+  slider.addEventListener('mouseenter', stopAutoSlide);
+  slider.addEventListener('mouseleave', startAutoSlide);
 
   // Reset on resize
   window.addEventListener('resize', () => {
     slideTo(Math.min(currentIndex, getMaxIndex()));
   });
+
+  // Start auto slide
+  startAutoSlide();
 }
 
 // ─── Export ───

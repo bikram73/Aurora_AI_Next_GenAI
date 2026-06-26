@@ -114,21 +114,87 @@
                 <div class="window-dot window-dot--yellow"></div>
                 <div class="window-dot window-dot--green"></div>
               </div>
-              <span class="dashboard-version">Aurora Dashboard v2.4</span>
+              <span class="dashboard-version">Aurora AI Console v2.4</span>
             </div>
             <div class="dashboard-grid">
-              <div class="dashboard-sidebar">
-                <div class="dashboard-block dashboard-block--light dashboard-block--sm"></div>
-                <div class="dashboard-block dashboard-block--light dashboard-block--md"></div>
-              </div>
-              <div class="dashboard-main">
-                <div class="dashboard-terminal">
-                  <div class="terminal-line terminal-line--green">&gt; AI core: online</div>
-                  <div class="terminal-line terminal-line--gold">&gt; System processing complete</div>
+              <!-- Sidebar -->
+              <aside class="dashboard-sidebar">
+                <div class="sidebar-item active">
+                  <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                  <span>Overview</span>
                 </div>
+                <div class="sidebar-item">
+                  <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                  <span>Workflows</span>
+                </div>
+                <div class="sidebar-item">
+                  <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v2h4v2h-4v2h4v2H9V7h6v2z"/></svg>
+                  <span>Models</span>
+                </div>
+                <div class="sidebar-item">
+                  <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                  <span>Analytics</span>
+                </div>
+              </aside>
+
+              <!-- Main Dashboard Area -->
+              <div class="dashboard-main">
+                <!-- Top Stats Header Row -->
                 <div class="dashboard-status-row">
-                  <div class="dashboard-status-card dashboard-status-card--primary"></div>
-                  <div class="dashboard-status-card dashboard-status-card--secondary"></div>
+                  <div class="dash-stat-card">
+                    <span class="dash-stat-label">AI core</span>
+                    <span class="dash-stat-value dash-stat-value--online">
+                      <span class="pulse-dot"></span> Online
+                    </span>
+                  </div>
+                  <div class="dash-stat-card">
+                    <span class="dash-stat-label">Latency</span>
+                    <span class="dash-stat-value">12.4ms</span>
+                  </div>
+                  <div class="dash-stat-card">
+                    <span class="dash-stat-label">Throughput</span>
+                    <span class="dash-stat-value">2,842/s</span>
+                  </div>
+                </div>
+
+                <!-- Mid Analytics Chart -->
+                <div class="dashboard-chart-card">
+                  <div class="chart-header">
+                    <span class="chart-title">Orchestration Load</span>
+                    <span class="chart-legend">Accuracy: 99.98%</span>
+                  </div>
+                  <div class="chart-svg-container">
+                    <svg viewBox="0 0 300 90" class="chart-svg">
+                      <!-- Animated Chart Line -->
+                      <path class="chart-line" d="M 0,80 Q 30,40 60,65 T 120,30 T 180,50 T 240,15 T 300,5" fill="none" stroke="url(#chart-grad)" stroke-width="3" />
+                      <!-- Shaded Area -->
+                      <path class="chart-area" d="M 0,80 Q 30,40 60,65 T 120,30 T 180,50 T 240,15 T 300,5 L 300,90 L 0,90 Z" fill="url(#area-grad)" opacity="0.15" />
+                      <defs>
+                        <linearGradient id="chart-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#FF9932" />
+                          <stop offset="100%" stop-color="#FFC801" />
+                        </linearGradient>
+                        <linearGradient id="area-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stop-color="#FF9932" />
+                          <stop offset="100%" stop-color="transparent" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Bottom Processing Timeline -->
+                <div class="dashboard-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title">Processing Timeline</span>
+                    <span class="terminal-dots"><span></span><span></span><span></span></span>
+                  </div>
+                  <div class="terminal-content">
+                    <div class="terminal-line"><span class="line-time">16:32:04</span> <span class="line-success">[OK]</span> Model initialization complete.</div>
+                    <div class="terminal-line"><span class="line-time">16:32:05</span> <span class="line-info">[INFO]</span> Context loading (depth=12k)...</div>
+                    <div class="terminal-line"><span class="line-time">16:32:07</span> <span class="line-warning">[WARN]</span> Queue load threshold >85%, scaling workers.</div>
+                    <div class="terminal-line"><span class="line-time">16:32:08</span> <span class="line-process">[RUN]</span> Orchestrating vector search pipeline...</div>
+                  </div>
                 </div>
               </div>
             </div>
