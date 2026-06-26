@@ -1378,7 +1378,7 @@ ul, ol {
 .testimonials-slider {
   display: flex;
   gap: var(--space-lg);
-  overflow: hidden;
+  width: max-content;
 }
 
 .testimonial-card {
