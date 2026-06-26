@@ -150,4 +150,4 @@ While the primary aesthetic is a polished dark mode, the project is architected 
 ---
 
 ## 📄 License
-This project is proprietary and built for high-performance speed run evaluation. All rights reserved. 🌌
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
