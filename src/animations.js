@@ -171,7 +171,7 @@ function initTestimonialSlider() {
     const containerWidth = slider.parentElement.offsetWidth;
     const cardWidth = getCardWidth();
     if (cardWidth === 0) return 0;
-    const visibleCards = Math.floor(containerWidth / cardWidth);
+    const visibleCards = Math.max(1, Math.floor(containerWidth / cardWidth));
     return Math.max(0, totalCards - visibleCards);
   }
 

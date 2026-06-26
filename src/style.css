@@ -1611,15 +1611,67 @@ ul, ol {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --space-section-lg: 64px;
+  }
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-lg);
+  }
+  /* Demo Chat Sandbox Mobile Overrides */
+  .demo-chat {
+    padding: var(--space-md);
+  }
+  .chat-msg {
+    max-width: 95%;
+  }
+  .chat-msg--ai .chat-bubble {
+    padding: 12px;
+  }
+  .chat-code-block {
+    padding: 10px;
+    margin-top: 10px;
+  }
+  .chat-code-block code {
+    font-size: 11.5px;
+  }
+  .demo-input {
+    padding: var(--space-md);
+  }
+  /* Testimonials Mobile Overrides */
+  .testimonial-card {
+    min-width: 260px;
+    max-width: 290px;
   }
 }
 
 @media (max-width: 480px) {
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+  /* Extra Small Mobile Overrides */
+  .demo-chat {
+    padding: var(--space-sm);
+  }
+  .chat-msg {
+    max-width: 100%;
+  }
+  .chat-msg--ai .chat-bubble {
+    padding: 10px;
+  }
+  .chat-code-block {
+    padding: 8px;
+    margin-top: 8px;
+  }
+  .chat-code-block code {
+    font-size: 10.5px;
+  }
+  .demo-input {
+    padding: var(--space-sm);
+  }
+  .testimonial-card {
+    min-width: 230px;
+    max-width: 255px;
   }
 }
 
