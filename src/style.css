@@ -169,6 +169,11 @@
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
+[data-theme="dark"] .mobile-menu {
+  background: rgba(23, 43, 54, 0.97); /* --oceanic-noir with transparency */
+  backdrop-filter: blur(20px);
+}
+
 /* ----- Reset & Base ----- */
 *, *::before, *::after {
   box-sizing: border-box;
