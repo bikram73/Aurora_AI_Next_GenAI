@@ -109,6 +109,31 @@ npm run preview
 
 ---
 
+## 🛠️ Tools & Technologies
+
+This project is built with a focus on performance, developer experience, and modern web standards. It leverages a suite of powerful, next-generation tools:
+
+*   **Core Framework & Bundling:**
+    *   **Vite:** Serves as the high-speed build tool and development server, providing a lightning-fast feedback loop.
+    *   **Rolldown:** The project is configured to use Rolldown, the Rust-based bundler for Vite, ensuring top-tier performance for production builds.
+
+*   **JavaScript & CSS Processing:**
+    *   **TypeScript:** The entire codebase is written in TypeScript for robust static typing and improved code quality.
+    *   **Oxc & esbuild:** For blazing-fast code transformation and minification, the project utilizes The Oxidation Compiler (Oxc) and esbuild, which are written in Rust and Go, respectively.
+    *   **PostCSS:** Used for advanced CSS transformations via plugins.
+    *   **Lightning CSS:** An extremely fast, Rust-based CSS parser, transformer, and minifier is integrated for highly optimized style processing.
+
+*   **Development & Utility Tools:**
+    *   **`http-proxy-3`:** Handles API requests and other proxying needs during development.
+    *   **Chokidar:** Provides efficient file-watching for Hot Module Replacement (HMR).
+    *   **picomatch:** A fast and accurate glob matcher used for file-matching patterns.
+    *   **`source-map-js`:** Generates accurate source maps for easier debugging of transpiled code.
+
+*   **Optimization & Minification:**
+    *   **Terser:** A robust JavaScript parser and minifier used for production builds.
+
+---
+
 ## 🎨 Design System Tokens
 
 The application features a dark-themed futuristic aesthetic constructed with custom HSL tokens in `src/style.css`:
@@ -117,6 +142,10 @@ The application features a dark-themed futuristic aesthetic constructed with cus
 *   **Secondary/Base Dark:** `#172B36` (Nocturnal Expedition)
 *   **Muted Glows:** Subtle cyan, gold, and violet backdrops simulating northern lights (Aurora).
 *   **Typography:** Elegant Google Fonts integration featuring **Inter** for clean body readability and **JetBrains Mono** / **Outfit** styles for premium technical titles and code blocks.
+
+### Dark & Light Mode
+
+While the primary aesthetic is a polished dark mode, the project is architected to support a light mode theme. The CSS variable system in `src/style.css` can be extended with a `[data-theme='light']` or a `prefers-color-scheme` media query to toggle between themes.
 
 ---
 
