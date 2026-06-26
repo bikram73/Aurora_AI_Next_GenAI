@@ -77,7 +77,7 @@ Ensure you have [Node.js](https://nodejs.org/) (v16.0.0 or higher) installed on 
 
 ### 1. Clone & Navigate
 ```bash
-git clone <repository-url>
+gh repo clone bikram73/Aurora_AI_Next_GenAI
 cd Aurora_AI
 ```
 
